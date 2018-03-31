@@ -1,0 +1,9 @@
+shared_context 'spy' do
+  before do
+    spy = Class.new do
+      def self.run(argumen); end
+    end
+
+    stub_const('Spy', spy)
+  end
+end

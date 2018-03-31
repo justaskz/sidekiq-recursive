@@ -1,14 +1,17 @@
-require "bundler/setup"
-require "sidekiq/recursive"
+require 'bundler/setup'
+require 'fakeredis'
+require 'pry'
+require 'sidekiq/recursive'
+require 'sidekiq/testing'
+
+require './spec/support/shared/simple_worker'
+require './spec/support/shared/spy'
 
 RSpec.configure do |config|
-  # Enable flags like --only-failures and --next-failure
-  config.example_status_persistence_file_path = ".rspec_status"
-
-  # Disable RSpec exposing methods globally on `Module` and `main`
   config.disable_monkey_patching!
 
-  config.expect_with :rspec do |c|
+  config.mock_with :rspec do |c|
     c.syntax = :expect
+    c.verify_partial_doubles = true
   end
 end

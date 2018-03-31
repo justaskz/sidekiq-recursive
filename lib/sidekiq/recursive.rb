@@ -1,7 +1,7 @@
-require "sidekiq/recursive/version"
+require 'sidekiq/recursive/version'
+require 'sidekiq/recursive/worker'
 
 module Sidekiq
   module Recursive
-    # Your code goes here...
   end
 end

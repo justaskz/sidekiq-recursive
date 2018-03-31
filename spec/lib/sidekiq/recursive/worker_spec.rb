@@ -9,6 +9,7 @@ RSpec.describe Sidekiq::Recursive::Worker do
     let(:arguments) { double }
 
     it 'starts recursive workers' do
+      expect(Sidekiq::Recursive::Start).to receive(:run).with(worker, arguments)
       expect(subject).to eq(true)
     end
   end

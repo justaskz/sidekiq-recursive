@@ -5,6 +5,7 @@ module Sidekiq::Recursive::Worker
 
   module ClassMethods
     def start(arguments)
+      Sidekiq::Recursive::Start.run(self, arguments)
       true
     end
 

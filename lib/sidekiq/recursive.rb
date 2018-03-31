@@ -4,5 +4,6 @@ require 'sidekiq/recursive/worker'
 
 module Sidekiq
   module Recursive
+    class UndefinedWorkerCountError < StandardError; end
   end
 end

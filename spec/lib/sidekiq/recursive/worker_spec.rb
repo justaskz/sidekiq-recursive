@@ -12,4 +12,16 @@ RSpec.describe Sidekiq::Recursive::Worker do
       expect(subject).to eq(true)
     end
   end
+
+  describe '.recursive_worker_count' do
+    let(:worker_count) { 2 }
+
+    it 'sets recursive worker count' do
+      expect { worker.recursive_worker_count }
+        .to raise_error(Sidekiq::Recursive::UndefinedWorkerCountError)
+
+      worker.recursive_worker_count(worker_count)
+      expect(worker.recursive_worker_count).to eq(worker_count)
+    end
+  end
 end

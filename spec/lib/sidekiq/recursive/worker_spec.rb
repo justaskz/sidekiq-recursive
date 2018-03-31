@@ -3,8 +3,8 @@ RSpec.describe Sidekiq::Recursive::Worker do
 
   let(:worker) { WorkerWithoutWorkerCount }
 
-  describe '.start' do
-    subject { worker.start(arguments) }
+  describe '.run' do
+    subject { worker.run(arguments) }
 
     let(:arguments) { double }
 

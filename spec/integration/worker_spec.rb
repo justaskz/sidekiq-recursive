@@ -1,5 +1,5 @@
 RSpec.describe Sidekiq::Recursive::Worker do
-  subject { SimpleWorker.start([1, 2, 3]) }
+  subject { SimpleWorker.run([1, 2, 3]) }
 
   include_context 'simple worker'
   include_context 'spy'

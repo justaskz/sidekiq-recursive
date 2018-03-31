@@ -11,7 +11,7 @@ RSpec.describe Sidekiq::Recursive::Worker do
     Sidekiq.configure_server { |config| config.redis = ConnectionPool.new(size: 1, &redis_conn) }
   end
 
-  xit 'process arguments' do
+  it 'process arguments' do
     expect(Spy).to receive(:run).with('1')
     expect(Spy).to receive(:run).with('2')
     expect(Spy).to receive(:run).with('3')

@@ -6,7 +6,9 @@ shared_context 'simple worker' do
 
       recursive_worker_count 1
 
-      def process(argument); end
+      def process(argument)
+        Spy.run(argument)
+      end
     end
 
     stub_const('SimpleWorker', worker)

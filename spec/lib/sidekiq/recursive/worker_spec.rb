@@ -25,4 +25,16 @@ RSpec.describe Sidekiq::Recursive::Worker do
       expect(worker.recursive_worker_count).to eq(worker_count)
     end
   end
+
+  describe '#perform' do
+    subject { worker.new.perform(worker_id, argument) }
+
+    let(:worker_id) { 1 }
+    let(:argument) { double }
+
+    it "performs worker's job" do
+      expect(Sidekiq::Recursive::Perform).to receive(:run).with(worker, worker_id, argument)
+      expect(subject).to eq(true)
+    end
+  end
 end

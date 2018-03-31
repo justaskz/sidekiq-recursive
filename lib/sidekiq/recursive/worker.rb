@@ -1,6 +1,7 @@
 module Sidekiq::Recursive::Worker
   def self.included(base)
     base.extend(ClassMethods)
+    base.include(InstanceMethods)
   end
 
   module ClassMethods
@@ -12,6 +13,13 @@ module Sidekiq::Recursive::Worker
     def recursive_worker_count(count = nil)
       raise Sidekiq::Recursive::UndefinedWorkerCountError if count.nil? && @worker_count.nil?
       @worker_count ||= count
+    end
+  end
+
+  module InstanceMethods
+    def perform(worker_id, argument)
+      Sidekiq::Recursive::Perform.run(self, worker_id, argument)
+      true
     end
   end
 end

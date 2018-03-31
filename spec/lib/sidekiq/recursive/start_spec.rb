@@ -1,9 +1,9 @@
 RSpec.describe Sidekiq::Recursive::Start, '.run' do
   subject { described_class.run(worker, arguments) }
 
-  include_context 'simple worker'
+  include_context 'worker without worker count'
 
-  let(:worker) { SimpleWorker }
+  let(:worker) { WorkerWithoutWorkerCount }
   let(:arguments) { double }
   let(:worker_count) { 1 }
   let(:worker_id) { 1 }

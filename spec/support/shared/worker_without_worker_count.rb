@@ -1,14 +1,12 @@
-shared_context 'simple worker' do
+shared_context 'worker without worker count' do
   before do
     worker = Class.new do
       include Sidekiq::Worker
       include Sidekiq::Recursive::Worker
 
-      recursive_worker_count 1
-
       def process(argument); end
     end
 
-    stub_const('SimpleWorker', worker)
+    stub_const('WorkerWithoutWorkerCount', worker)
   end
 end

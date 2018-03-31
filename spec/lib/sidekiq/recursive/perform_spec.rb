@@ -1,10 +1,10 @@
 RSpec.describe Sidekiq::Recursive::Perform, '.run' do
   subject { described_class.run(worker_instance, worker_id, argument) }
 
-  include_context 'simple worker'
+  include_context 'basic worker'
   include_context 'spy'
 
-  let(:worker) { SimpleWorker }
+  let(:worker) { BasicWorker }
   let(:worker_instance) { worker.new }
   let(:worker_id) { 1 }
   let(:argument) { 'argument' }

@@ -1,4 +1,4 @@
-shared_context 'simple worker' do
+shared_context 'basic worker' do
   before do
     worker = Class.new do
       include Sidekiq::Worker
@@ -11,6 +11,6 @@ shared_context 'simple worker' do
       end
     end
 
-    stub_const('SimpleWorker', worker)
+    stub_const('BasicWorker', worker)
   end
 end

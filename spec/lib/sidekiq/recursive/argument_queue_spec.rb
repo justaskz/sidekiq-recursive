@@ -1,7 +1,7 @@
 RSpec.describe Sidekiq::Recursive::ArgumentQueue do
-  include_context 'simple worker'
+  include_context 'basic worker'
 
-  let(:worker) { SimpleWorker }
+  let(:worker) { BasicWorker }
 
   describe '.push' do
     subject { described_class.push(worker, arguments) }

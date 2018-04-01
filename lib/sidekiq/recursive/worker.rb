@@ -14,6 +14,10 @@ module Sidekiq::Recursive::Worker
       raise Sidekiq::Recursive::UndefinedWorkerCountError if count.nil? && @worker_count.nil?
       @worker_count ||= count
     end
+
+    def before_all(action_name = nil)
+      @before_all ||= action_name
+    end
   end
 
   module InstanceMethods

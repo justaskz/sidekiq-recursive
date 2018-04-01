@@ -26,6 +26,16 @@ RSpec.describe Sidekiq::Recursive::Worker do
     end
   end
 
+  describe '.before_all' do
+    let(:action_name) { :before_all_action }
+
+    it 'sets before_all action name' do
+      expect(worker.before_all).to eq(nil)
+      worker.before_all(action_name)
+      expect(worker.before_all).to eq(action_name)
+    end
+  end
+
   describe '#perform' do
     subject { worker.new.perform(worker_id, argument) }
 

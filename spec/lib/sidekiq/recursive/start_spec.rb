@@ -16,6 +16,10 @@ RSpec.describe Sidekiq::Recursive::Start, '.run' do
       .to receive(:push)
       .with(worker, arguments)
 
+    expect(Sidekiq::Recursive::Hooks::BeforeAll)
+      .to receive(:run)
+      .with(worker)
+
     allow(Sidekiq::Recursive::ArgumentQueue)
       .to receive(:pop)
       .with(worker)

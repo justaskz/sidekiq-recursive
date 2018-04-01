@@ -6,6 +6,7 @@ require 'sidekiq/testing'
 
 require './spec/support/shared/basic_worker'
 require './spec/support/shared/spy'
+require './spec/support/shared/worker_with_hooks'
 require './spec/support/shared/worker_without_worker_count'
 
 RSpec.configure do |config|

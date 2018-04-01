@@ -35,6 +35,30 @@ user_ids = User.where(is_old: true).ids
 CleanUpOldUsers.run(user_ids)
 ```
 
+#### before_all and after_all hooks
+```ruby
+class CleanUpOldUsers
+  include Sidekiq::Worker
+  include Sidekiq::Recursive::Worker
+
+  recursive_worker_count 5
+  before_all :bar
+  after_all :foo
+
+  def bar
+    # do something before starting all workers
+  end
+
+  def process(user_id)
+    User.destroy(user_id)
+  end
+
+  def foo
+    # do something after all workers are finished
+  end
+end
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

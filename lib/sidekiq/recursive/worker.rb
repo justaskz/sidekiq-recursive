@@ -18,6 +18,10 @@ module Sidekiq::Recursive::Worker
     def before_all(action_name = nil)
       @before_all ||= action_name
     end
+
+    def after_all(action_name = nil)
+      @after_all ||= action_name
+    end
   end
 
   module InstanceMethods

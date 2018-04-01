@@ -6,6 +6,7 @@ shared_context 'worker with hooks' do
 
       recursive_worker_count 1
       before_all :before_all_action
+      after_all :after_all_action
 
       def process(argument)
         Spy.run(argument)
@@ -13,6 +14,10 @@ shared_context 'worker with hooks' do
 
       def before_all_action
         Spy.run(:running_before_all_action)
+      end
+
+      def after_all_action
+        Spy.run(:running_after_all_action)
       end
     end
 

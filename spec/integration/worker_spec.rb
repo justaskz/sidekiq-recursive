@@ -34,6 +34,7 @@ RSpec.describe Sidekiq::Recursive::Worker do
       expect(Spy).to receive(:run).with('1')
       expect(Spy).to receive(:run).with('2')
       expect(Spy).to receive(:run).with('3')
+      expect(Spy).to receive(:run).with(:running_after_all_action)
 
       subject
     end

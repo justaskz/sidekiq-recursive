@@ -28,6 +28,7 @@ RSpec.describe Sidekiq::Recursive::Perform, '.run' do
 
     it 'does not enqueue new worker' do
       expect(worker_instance).to receive(:process).with(argument)
+      expect(Sidekiq::Recursive::Hooks::AfterAll).to receive(:run).with(worker, worker_id)
       expect(worker).not_to receive(:perform_async)
       expect(subject).to eq(nil)
     end

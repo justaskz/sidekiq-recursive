@@ -36,6 +36,16 @@ RSpec.describe Sidekiq::Recursive::Worker do
     end
   end
 
+  describe '.after_all' do
+    let(:action_name) { :after_all_action }
+
+    it 'sets after_all action name' do
+      expect(worker.after_all).to eq(nil)
+      worker.after_all(action_name)
+      expect(worker.after_all).to eq(action_name)
+    end
+  end
+
   describe '#perform' do
     subject { worker.new.perform(worker_id, argument) }
 

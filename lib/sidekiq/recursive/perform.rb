@@ -4,7 +4,7 @@ class Sidekiq::Recursive::Perform
     return worker_instance.process(argument) if worker_id == :failed_worker
     safe_process(worker_instance, argument)
     next_argument = Sidekiq::Recursive::ArgumentQueue.pop(worker)
-    return unless next_argument
+    return Sidekiq::Recursive::Hooks::AfterAll.run(worker, worker_id) unless next_argument
     worker.perform_async(worker_id, next_argument)
 
     true

@@ -12,7 +12,7 @@ class Sidekiq::Recursive::Perform
 
   def self.safe_process(worker_instance, argument)
     worker_instance.process(argument)
-  rescue
+  rescue StandardError
     worker_instance.class.perform_async(:failed_worker, argument)
   end
 end

@@ -1,13 +1,9 @@
 require 'bundler/setup'
-require 'fakeredis'
-require 'pry'
+Bundler.require(:development)
+
 require 'sidekiq/recursive'
 require 'sidekiq/testing'
-
-require './spec/support/shared/basic_worker'
-require './spec/support/shared/spy'
-require './spec/support/shared/worker_with_hooks'
-require './spec/support/shared/worker_without_worker_count'
+Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }
 
 RSpec.configure do |config|
   config.disable_monkey_patching!

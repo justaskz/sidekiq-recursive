@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sidekiq-recursive (0.3.0)
+    sidekiq-recursive (0.2.3)
       sidekiq (>= 3.0, < 8.0)
 
 GEM

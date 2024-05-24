@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name                  = 'sidekiq-recursive'
-  spec.version               = '0.2.2'
+  spec.version               = '0.2.3'
   spec.authors               = 'Justas Kazakauskas'
   spec.email                 = 'leakymirror@gmail.com'
   spec.summary               = 'Use simple recursion to limit sidekiq workers per job'

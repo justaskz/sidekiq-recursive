@@ -32,7 +32,7 @@ class CleanUpOldUsers
 end
 
 user_ids = User.where(is_old: true).ids
-CleanUpOldUsers.run(user_ids)
+CleanUpOldUsers.call(user_ids)
 ```
 
 #### before_all and after_all hooks

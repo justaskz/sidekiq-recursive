@@ -1,10 +1,10 @@
 RSpec.describe Sidekiq::Recursive::Perform, '.run' do
   subject { described_class.run(worker_instance, worker_id, argument) }
 
-  include_context 'basic worker'
+  include_context 'worker'
   include_context 'spy'
 
-  let(:worker) { BasicWorker }
+  let(:worker) { Worker }
   let(:worker_instance) { worker.new }
   let(:worker_id) { 1 }
   let(:argument) { 'argument' }
@@ -40,13 +40,13 @@ RSpec.describe Sidekiq::Recursive::Perform, '.run' do
     end
 
     it 'reenqueues worker as failed worker' do
-      expect(worker).to receive(:perform_async).with(:failed_worker, argument)
+      expect(worker).to receive(:perform_async).with(Sidekiq::Recursive::FAILED_WORKER_ID, argument)
       expect(worker).to receive(:perform_async).with(worker_id, next_argument)
       expect(subject).to eq(true)
     end
 
     context 'when processing failed worker' do
-      let(:worker_id) { :failed_worker }
+      let(:worker_id) { Sidekiq::Recursive::FAILED_WORKER_ID }
 
       it 'fails' do
         expect { subject }.to raise_error(StandardError)
@@ -55,7 +55,7 @@ RSpec.describe Sidekiq::Recursive::Perform, '.run' do
   end
 
   context 'when processing failed worker' do
-    let(:worker_id) { :failed_worker }
+    let(:worker_id) { Sidekiq::Recursive::FAILED_WORKER_ID }
 
     it 'does not enqueue next worker' do
       expect(worker).not_to receive(:perform_async).with(worker_id, next_argument)
